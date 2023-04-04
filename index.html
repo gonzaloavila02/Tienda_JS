@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabla de Productos</title>
+	<script>
+		function agregarProducto() {
+			var codigo = document.getElementById("codigo").value;
+			var descripcion = document.getElementById("descripcion").value;
+			var importe = document.getElementById("importe").value;
+			var stock = document.getElementById("stock").value;
+
+			// crear una fila para la tabla
+			var tabla = document.getElementById("tabla");
+			var fila = tabla.insertRow();
+
+			// agregar celdas a la fila
+			var celdaCodigo = fila.insertCell(0);
+			var celdaDescripcion = fila.insertCell(1);
+			var celdaImporte = fila.insertCell(2);
+			var celdaStock = fila.insertCell(3);
+
+			// asignar valores a las celdas
+			celdaCodigo.innerHTML = codigo;
+			celdaDescripcion.innerHTML = descripcion;
+			celdaImporte.innerHTML = importe;
+			celdaStock.innerHTML = stock;
+
+			// almacenar la tabla en localStorage
+			localStorage.setItem("tablaProductos", tabla.innerHTML);
+		}
+
+		window.onload = function() {
+			// cargar la tabla desde localStorage
+			var tabla = document.getElementById("tabla");
+			tabla.innerHTML = localStorage.getItem("tablaProductos");
+		}
+	</script>
+</head>
+<body>
+	<h1>Tabla de Productos</h1>
+
+	<table id="tabla" border="1">
+		<tr>
+			<th>Codigo_Producto</th>
+			<th>Descripcion</th>
+			<th>Importe</th>
+			<th>Stock</th>
+		</tr>
+	</table>
+
+	<br>
+
+	<form>
+		<label for="codigo">Codigo_Producto:</label>
+		<input type="text" id="codigo" name="codigo"><br>
+
+		<label for="descripcion">Descripcion:</label>
+		<input type="text" id="descripcion" name="descripcion"><br>
+
+		<label for="importe">Importe:</label>
+		<input type="text" id="importe" name="importe"><br>
+
+		<label for="stock">Stock:</label>
+		<input type="text" id="stock" name="stock"><br>
+
+		<input type="button" value="Agregar Producto" onclick="agregarProducto()">
+	</form>
+</body>
+</html>
